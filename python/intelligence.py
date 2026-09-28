@@ -13,8 +13,8 @@ def main() -> None:
             return
 
         try:
-            # Assess the single highest-severity recent signal.
-            page = client.signals.list(bbox=AOI, days=7, sort="severity", limit=1)
+            # Assess the recent signal with the highest imaging value.
+            page = client.signals.list(bbox=AOI, recency="24h", sort="geoint", limit=1)
             if page.signals and page.signals[0].id is not None:
                 event_id = page.signals[0].id
                 assessment = client.intelligence.assess(event_id, kind="quick")

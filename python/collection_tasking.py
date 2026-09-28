@@ -68,13 +68,15 @@ def main() -> None:
             for p in passes.passes:
                 print(f"  {p.start}  {p.satellite:22s} {p.collection_mode or '-':10s} peak={p.peak_elevation_deg}°")
 
-        # 4. WATCH IT. Creating the order is free; only a check that finds something new
-        #    runs the Analyst and is metered, and the response states the monthly ceiling.
-        order = client.standing_orders.create(bbox=AOI, name="aoi-watch-example", cadence="weekly")
+        # 4. WATCH IT — the app's "Watch this area", checked weekly. Creating the order is
+        #    free; only a check that finds something new runs the Analyst and is metered,
+        #    and the response states the monthly ceiling.
+        order = client.standing_orders.create(bbox=AOI, name="aoi-watch-example")
         print(f"\n{order.summary}")
-        if order.order and order.order.id:
-            client.standing_orders.delete(order.order.id)   # example only — don't leave it behind
-            print("(example order deleted)")
+        if order.watch_id:
+            # The order joined the Watchlist. Pause or remove it there, as in the app — note that
+            # deleting a watch also removes everything else bound to the same area.
+            print(f"(stop it with client.watches.pause({order.watch_id!r}) or .delete(...))")
 
 
 if __name__ == "__main__":

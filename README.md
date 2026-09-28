@@ -29,7 +29,7 @@ curl -H "Authorization: Bearer $OFFNADIR_DELTA_API_KEY" https://offnadir-delta.c
 | [`python/collection_tasking.py`](python/collection_tasking.py) | A collection manager's loop: rank targets, plan the imagery, check the next pass. |
 | [`python/intelligence.py`](python/intelligence.py) | AI assessment and the analyst agent (metered — these are the expensive calls). |
 | [`python/mcp_tools.py`](python/mcp_tools.py) | Call the MCP endpoint directly with a static API key. |
-| [`python/paginate_and_aggregate.py`](python/paginate_and_aggregate.py) | Iterate every signal across pages, then pull aggregate stats and hotspots. |
+| [`python/paginate_and_aggregate.py`](python/paginate_and_aggregate.py) | Iterate every signal across pages and count them by category on the client side. |
 | [`python/quickstart.py`](python/quickstart.py) | Fetch the top signals in an area of interest. |
 
 Run any of them with `python python/<file>`.

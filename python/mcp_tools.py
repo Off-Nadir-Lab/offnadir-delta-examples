@@ -15,7 +15,7 @@ def main() -> None:
 
         print("\nTools:", [t["name"] for t in mcp.list_tools()])
 
-        result = mcp.call_tool("query_signals", {"bbox": AOI, "days": 7, "limit": 5})
+        result = mcp.call_tool("query_signals", {"bbox": AOI, "recency": "24h", "limit": 5})
         # Tool results are MCP content blocks; the payload is JSON text.
         for block in result.get("content", []):
             if block.get("type") == "text":

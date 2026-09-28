@@ -16,9 +16,7 @@ def main() -> None:
 
         page = client.signals.list(
             bbox=UKRAINE,
-            days=7,
-            min_severity=5,
-            sort="severity",
+            recency="24h",
             limit=20,
         )
         charged = page.meta.tokens.charged if page.meta.tokens else 0
