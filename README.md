@@ -31,6 +31,7 @@ curl -H "Authorization: Bearer $OFFNADIR_DELTA_API_KEY" https://offnadir-delta.c
 | [`python/mcp_tools.py`](python/mcp_tools.py) | Call the MCP endpoint directly with a static API key. |
 | [`python/paginate_and_aggregate.py`](python/paginate_and_aggregate.py) | Iterate every signal across pages and count them by category on the client side. |
 | [`python/quickstart.py`](python/quickstart.py) | Fetch the top signals in an area of interest. |
+| [`python/webhook_receiver.py`](python/webhook_receiver.py) | Receive watch notifications on your own endpoint and verify each delivery. |
 
 Run any of them with `python python/<file>`.
 

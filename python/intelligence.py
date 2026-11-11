@@ -1,5 +1,7 @@
 """AI assessment and the analyst agent (metered — these are the expensive calls)."""
 
+import uuid
+
 from offnadir_delta import Client
 from offnadir_delta.errors import InsufficientTokensError, PermissionDeniedError
 
@@ -20,10 +22,14 @@ def main() -> None:
                 assessment = client.intelligence.assess(event_id, kind="quick")
                 print("Assessment:\n", assessment.content, "\n")
 
-            # Free-form analyst question (metered 5-123 tokens, not idempotent).
-            answer = client.intelligence.analyst(
+            # Free-form analyst question (metered 5-123 tokens). A long run answers 202 and
+            # finishes in the background; analyst_and_wait polls it for free until the brief
+            # is ready. Keep the idempotency key if you re-send after a timeout: the same key
+            # fetches the same run instead of paying for a second one.
+            answer = client.intelligence.analyst_and_wait(
                 "What is the most significant escalation this week and why?",
                 bbox=AOI,
+                idempotency_key=str(uuid.uuid4()),
             )
             print("Analyst brief:\n", answer.brief)
         except PermissionDeniedError:
