@@ -17,10 +17,10 @@ def main() -> None:
             bbox=AOI,
             start_date=(today - timedelta(days=13)).isoformat(),
             end_date=today.isoformat(),
-            min_severity_band=6,
+            min_geoint_level=4,
         ):
             by_category[signal.category or "unknown"] += 1
-        print("High-severity signals by category:")
+        print("Signals with a GEOINT score of 4+ by category:")
         for category, count in by_category.most_common():
             print(f"  {category}: {count}")
 

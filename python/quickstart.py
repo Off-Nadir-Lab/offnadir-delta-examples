@@ -22,7 +22,7 @@ def main() -> None:
         charged = page.meta.tokens.charged if page.meta.tokens else 0
         print(f"\n{page.meta.count} signals ({charged} tokens charged):\n")
         for s in page.signals:
-            print(f"  [{s.severity_band}] {s.last_reported_at} {s.country_code} — {s.title}")
+            print(f"  [GEOINT {s.geoint_level}] {s.last_reported_at} {s.country_code} — {s.title}")
 
 
 if __name__ == "__main__":

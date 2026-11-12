@@ -26,13 +26,14 @@ async def main() -> None:
         for scene in scenes.scenes[:5]:
             print(f"  {scene.id} {scene.datetime} cloud={scene.cloud_cover}")
 
-        # Async iteration over every signal in a date range, Severity 6+ (a plan with event
-        # filters applies the severity filter; meta.filter_clamp says when it was not applied).
+        # Async iteration over every signal in a date range with a GEOINT score of 4 or more
+        # (a plan with event filters applies the score filter; meta.filter_clamp says when it
+        # was not applied).
         async for signal in client.signals.iterate(
             bbox=AOI,
             start_date=(TODAY - timedelta(days=2)).isoformat(),
             end_date=TODAY.isoformat(),
-            min_severity_band=6,
+            min_geoint_level=4,
         ):
             print("  !", signal.title)
 
